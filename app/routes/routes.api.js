@@ -11,6 +11,12 @@ var Book = require('../models/book');
 
 module.exports = function (app, router) {
 
+  //HOME PAGE (with login links)
+  app.get('/', function(req,res){
+    res.render('./public/views/index.ejs');
+  });
+
+
 //ROUTES FOR API
 //================
 //create an instance of the express Router
@@ -123,9 +129,19 @@ module.exports = function (app, router) {
 
   app.use('/api', router);
 
-  app.get('*', function (req, res) {
+
+
+  /*app.get('*', function (req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
   });
+
+
+  app.use(function(req, res, next) {
+    res.status(404).send('Sorry cannot find that!');
+  });
+*/
+
+
 
 };
 
