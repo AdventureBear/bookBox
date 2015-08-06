@@ -10,6 +10,7 @@
     "ejs": "^2.3.3",
     "express": "~4.0.0",
     "express-session": "^1.11.3",
+    "exreg-routes": "^0.3.0",
     "method-override": "^2.3.4",
     "mongoose": "~3.6.13",
     "morgan": "^1.6.1",

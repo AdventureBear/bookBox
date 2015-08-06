@@ -11,12 +11,6 @@ var Book = require('../models/book');
 
 module.exports = function (app, router) {
 
-  //HOME PAGE (with login links)
-  app.get('/', function(req,res){
-    res.render('./public/views/index.ejs');
-  });
-
-
 //ROUTES FOR API
 //================
 //create an instance of the express Router
@@ -24,18 +18,14 @@ module.exports = function (app, router) {
 
 //middleware for all requests
 //log to console w/ each request
-  router.use(function (req, res, next) {
-    console.log('Something is happening.');
-    next();
-  });
+ // router.use(function (req, res, next) {
+  //  console.log('Something is happening.');
+  //  next();
+  //});
 
+//all routes that end in /api/books
 
-//more api routes here
-//all routes that end in /books
-//test change
-
-
-  router.route('/books')
+  router.route('/api/books')
     //create a book
     .post(function (req, res) {
       var book = new Book();  //create book...from the schmea
@@ -65,14 +55,14 @@ module.exports = function (app, router) {
       }); //  find
     });  //REST methods
 
-//routes ending with /books/:book_id
-  router.route('/books/:book_id')
+//routes ending with /api/books/:book_id
+  router.route('/api/books/:book_id')
     .get(function (req, res) {
       Book.findById(req.params.book_id, function (err, book) {
         if (err)
           res.send(err);
-
-        res.json(book);
+          
+        console.log(res.json(book));
 
       });  //findByID
     })
@@ -116,18 +106,18 @@ module.exports = function (app, router) {
         //res.json({message: 'Successfully deleted ' + res.name });
 
       });
-    });//REST for this route (/books/:book_id)
+    });//REST for this route (/api/books/:book_id)
 
 
   //test the route
-  router.get('/', function (req, res) {
+  router.get('/api', function (req, res) {
     res.json({message: 'hooray! welcome to the bookBox API!'});
   });
 
   //REGISTER ROUTES
   //all will be prefixed with /api
 
-  app.use('/api', router);
+  app.use('', router);
 
 
 

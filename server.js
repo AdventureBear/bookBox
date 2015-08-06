@@ -29,14 +29,19 @@ mongoose.connect(db.url);
 
 require('./config/passport')(passport);
 
+
+
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
 app.use(methodOverride());
 app.use(morgan('dev'));
-//app.use(express.static(__dirname + '/public'));
+
+console.log(__dirname);
 app.use(cookieParser());
 
+app.set('views', process.cwd() + '/views');
 app.set('view engine', 'ejs');
 
 //required for passport
@@ -47,11 +52,12 @@ app.use(flash());
 
 //Static Routes
 require('./app/routes/routes.static')(app,passport);
+app.use(express.static(__dirname + '/public'));
 
 //API routes
 var router = express.Router();
-require('./app/routes/routes.api')(app, router, passport);
-
+//require('./app/routes/routes.api')(app, router, passport);
+require('./app/routes/routes.api')(app, router);
 //set port
 var port = process.env.PORT || 8080;
 
