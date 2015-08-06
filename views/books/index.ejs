@@ -1,71 +1,100 @@
 <!DOCTYPE html>
 
 <!--Assign Angular Module-->
-<html ng-app = "bookBox">
+<html ng-app="bookBox">
+
 <head lang="en">
-    <!--METAs -->
-    <meta charset="UTF-8">
-    <title>BookBox MEAN Stack Basejump</title>
+    <% include ../partials/head %>
+        <!--METAs -->
+        <meta charset="UTF-8">
+        <title>BookBox MEAN Stack Basejump</title>
 
-    <!-- SCROLLS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-    <style>
-        html                    { overflow-y:scroll; }
-        body                    { padding-top:50px; }
-        #todo-list              { margin-bottom:30px; }
-    </style>
+        <!-- SCROLLS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <!-- load bootstrap -->
+        <style>
+            html {
+                overflow-y: scroll;
+            }
+            
+            body {
+                padding-top: 50px;
+            }
+            
+            #todo-list {
+                margin-bottom: 30px;
+            }
+        </style>
 
-    <!-- SPELLS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="core.js"></script>
+        <!-- SPELLS -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <!-- load jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <!-- load angular -->
+        <script src="core.js"></script>
 
 
 
 </head>
 
 <!-- SET THE CONTROLLER AND GET ALL BOOKS -->
+
 <body ng-controller="mainController">
-  <div class = "container">
+    <header>
+        <% include ../partials/header %>
+    </header>
 
-      <!--HEADER & BOOK COUNT-->
-      <div class = "jumbotron text-center">
-          <h1>There are <span class="label label-info">{{books.length}}</span> books in our community Book Box!</h1>
-      </div>
+    <div class="container">
+
+        <!--HEADER & BOOK COUNT-->
+        <div class="jumbotron text-center">
+            <h1>There are <span class="label label-info">{{books.length}}</span> books in our community Book Box!</h1>
+        </div>
 
 
-      <!-- BOOK LIST -->
-      <div id="todo-list" class="row">
-          <div class="col-sm-4 col-sm-offset-4">
+        <!-- BOOK LIST -->
+        <div id="todo-list" class="row">
+            <div class="col-sm-8">
+                <h1>Community Library - All Books</h1>
+                <!-- Loop over the in scope books-->
+                <div class="checkbox" ng-repeat="book in books">
+                    <label>
+                        <input type="checkbox" ng-click="deleteBook(book._id)"> {{book.name}}
+                    </label>
+                </div>
 
-            <!-- Loop over the in scope books-->
-            <div class="checkbox" ng-repeat="book in books">
-                <label>
-                    <input type="checkbox" ng-click="deleteBook(book._id)"> {{book.name}}
-                </label>
+            
+
+
+            <!--FORM TO CREATE BOOKS-->
+            
             </div>
 
-          </div>
+            <div class="col-sm-4">
 
-      </div>
+                <div id="book-form" >
+              
+                    <form>
+                        <div class="form-group">
+
+                            <!--Bind this value to formData.text in Angular -->
+                            <input type="text" class="form-control input-lg text-center" placeholder="The greatest love story ever told" ng-model="formData.name">
+                        </div>
+
+                        <!--createBook() will create new books -->
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createBook()">Add Book</button>
+                    </form>
+               
+            </div>
+            </div>
+        </div>
+    </div>
 
 
-      <!--FORM TO CREATE BOOKS-->
-      <div id="book-form" class="row">
-          <div class="col-sm-8 col-sm-offset-2 text-center">
-              <form>
-                  <div class="form-group">
 
-                      <!--Bind this value to formData.text in Angular -->
-                      <input type="text" class="form-control input-lg text-center" placeholder="The greatest love story ever told" ng-model="formData.name">
-                  </div>
-
-                  <!--createBook() will create new books -->
-                  <button type="submit" class="btn btn-primary btn-lg" ng-click="createBook()">Add Book</button>
-              </form>
-          </div>
-      </div>
-  </div>
-
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
 </body>
+
 </html>
