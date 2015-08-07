@@ -57,7 +57,7 @@ app.use(express.static(__dirname + '/public'));
 //API routes
 var router = express.Router();
 //require('./app/routes/routes.api')(app, router, passport);
-require('./app/routes/routes.api')(app, router);
+require('./app/routes/routes.api')(app, router, passport);
 //set port
 var port = process.env.PORT || 8080;
 
