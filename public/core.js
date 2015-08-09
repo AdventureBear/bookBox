@@ -9,8 +9,17 @@ function mainController($scope, $http){
   //when landing on page, get all the books in the library
   $http.get('/api/books')
     .success(function(data){
-      $scope.books = data;
+     $scope.books = data;
       console.log(data);
+        // data.forEach(function(book){
+        //   //console.log(book.owner)
+        //   //var userID = data.owner;
+        //   $http.get('/api/users/' + book.owner )
+        //           .success(function(book_owner){
+        //                   console.log(book_owner.local.email);  // data from owner
+        //                   book.owneremail = book_owner.local.email;
+        //             }) 
+        //   })
     })
     .error(function(data){
       console.log('Error: ' + data);

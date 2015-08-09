@@ -51,20 +51,46 @@ module.exports = function (app, router, passport) {
        // 
         
         console.log("Books of user " + req.user.books, "New Book ID: " + book._id);
-        Book.find(function (err, books) {
-          if (err)
-            res.send(err);
+        
+         Book.find() //  find
+        .populate("owner")
+        .exec(function(err, books){
+            if (err) return res.send(err);
+        
 
           res.json(books);
+        
+        
+        // Book.find(function (err, books) {
+        //   if (err)
+        //     res.send(err);
+
+        //   res.json(books);
         });
         //res.json({message: 'Book created!'});
       });  //save
     })
 
     .get(function (req, res) {
-      Book.find(function (err, books) {
-        if (err)
-          res.send(err);
+       Book.find() //  find
+      .populate("owner")
+      .exec(function(err, books){
+          if (err) return res.send(err);
+      // Book.find
+        
+      // (function (err, books) {
+      //   if (err)
+      //     res.send(err);
+
+        // populate books with owners email (or username) for display
+          
+        /// now i have a books object (array of books) 
+     
+        
+         
+           // only return the Persons email
+          
+        //console.log(books.owner.local.email);
 
         res.json(books);
       }); //  find
@@ -109,13 +135,15 @@ module.exports = function (app, router, passport) {
         _id: req.params.book_id
       }, function (err, book) {
         if (err)
-          res.send(err);
+          return res.send(err);
 
 
         //get and return all the todos after deleting
-        Book.find(function (err, books) {
-          if (err)
-            res.send(err);
+      Book.find() //  find
+        .populate("owner")
+        .exec(function(err, books){
+            if (err) return res.send(err);
+        
 
           res.json(books);
         });

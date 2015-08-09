@@ -57,36 +57,78 @@
             <div class="col-sm-8">
                 <h1>Community Library - All Books</h1>
                 <!-- Loop over the in scope books-->
-                <div class="checkbox" ng-repeat="book in books">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Owner</th>
+                                <th>Action</th>
+                                <th></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--<tr>
+                                <td>
+                                    <input class="form-control" ng-model="book.name">
+                                </td>
+                                <td>
+                                    <input class="form-control" ng-model="book.owner">
+                                </td>
+                                <td>
+                                    <button class="btn btn-info" ng-click="createBook()">Add Book</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" ng-click="deleteBook(book._id)">Update</button>
+                                </td>
+                            </tr>-->
+                            <tr ng-repeat="book in books">
+                                <td>{{book.name}}</td>
+                                <td><a ng-href="/api/users/{{book.owner._id}}">{{book.owner.local.email}}</a></td>
+                                <td>
+                                    <button class="btn btn-danger" ng-click="deleteBook(book._id)">Remove</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" ng-click="tradeBook(book._id)">Trade</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
                     <label>
-                        <!--<input type="checkbox" ng-click="deleteBook(book._id)"> {{book.name}}-->
-                        <input type="checkbox" > {{book.name}}
+                        <!--<input type="checkbox" ng-click="deleteBook(book._id)"> {{book.name}}
+                        <input type="checkbox"> {{book.name}}-->
                     </label>
                 </div>
 
-            
 
 
-            <!--FORM TO CREATE BOOKS-->
-            
+
+                <!--FORM TO CREATE BOOKS-->
+
             </div>
 
             <div class="col-sm-4">
+                <h1>Add a Book!</h1>
+                <div id="book-form">
 
-                <div id="book-form" >
-              
-                    <form>
+                    <form name="newBook">
                         <div class="form-group">
 
                             <!--Bind this value to formData.text in Angular -->
-                            <input type="text" class="form-control input-lg text-center" placeholder="The greatest love story ever told" ng-model="formData.name">
+                            <input type="text" class="form-control input-lg text-center" ng-required="true"
+  ng-minlength="3" placeholder="The greatest love story ever told" ng-model="formData.name">
                         </div>
 
                         <!--createBook() will create new books -->
-                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createBook()">Add Book</button>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-disabled="newBook.$invalid" ng-click="createBook()">Add Book</button>
                     </form>
-               
-            </div>
+
+                </div>
             </div>
         </div>
     </div>
