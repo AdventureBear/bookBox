@@ -30,8 +30,30 @@ module.exports = function(app, passport) {
     }
   });
 
+app.get('/users', function(req,res){
+    console.log ("isAuth? ", req.isAuthenticated());
+    if (req.isAuthenticated()){
+      res.render('../views/users/index.ejs', {
+        users:[]
+      } )
+    } else {
+      res.render('../views/index.ejs');
+    }
+  
+})
 
 
+app.get('/users/:user_id', function(req,res){
+    console.log ("isAuth? ", req.isAuthenticated());
+    if (req.isAuthenticated()){
+      res.render('../views/users/show.ejs', {
+        users:[]
+      } )
+    } else {
+      res.render('../views/index.ejs');
+    }
+  
+})
 
   // LOGIN ===============================
   // show the login form

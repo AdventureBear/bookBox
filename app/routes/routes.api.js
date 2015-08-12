@@ -40,13 +40,13 @@ module.exports = function (app, router, passport) {
       //save the book & check for errors, return all books
       book.save(function (err, book) {
         if (err)
-          res.send(err);
+          return res.send(err);
 
         user.books.push(book._id);
         //add new book id to users collection
         user.save(function(err) {
           if (err)
-            res.send(err);
+            return res.send(err);
         })
        // 
         
@@ -101,7 +101,7 @@ module.exports = function (app, router, passport) {
     .get(function (req, res) {
       Book.findById(req.params.book_id, function (err, book) {
         if (err)
-          res.send(err);
+          return res.send(err);
           
         console.log(res.json(book));
 
@@ -112,7 +112,7 @@ module.exports = function (app, router, passport) {
     .put(function (req, res) {
       Book.findById(req.params.book_id, function (err, book) {
         if (err)
-          res.send(err);
+          return res.send(err);
 
 
         book.name = req.body.name;
@@ -121,7 +121,7 @@ module.exports = function (app, router, passport) {
         //save the book & check for errors
         book.save(function (err) {
           if (err)
-            res.send(err);
+            return res.send(err);
 
           res.json({message: 'Book updated!'});
         });
@@ -157,7 +157,7 @@ module.exports = function (app, router, passport) {
      .get(function (req, res) {
         User.find(function (err, users) {
         if (err)
-          res.send(err);
+         return res.send(err);
 
         res.json(users);
       }); //  find
@@ -167,12 +167,20 @@ module.exports = function (app, router, passport) {
 //routes ending with /api/users/:user_id
   router.route('/users/:user_id')
     .get(function (req, res) {
-      User.findById(req.params.user_id, function (err, user) {
-        if (err)
-          res.send(err);
+      
+      User.findById(req.params.user_id)
+        .populate("books")
+        .exec(function(err, user){
+            if (err) return res.send(err);
+        
+         console.log(res.json(user));
+      
+      // User.findById(req.params.user_id, function (err, user) {
+      //   if (err)
+      //     return res.send(err);
           
-        console.log(res.json(user));
-        console.log(req.user);
+      //   console.log(res.json(user));
+      //   console.log(req.user);
 
       });  //findByID
     });

@@ -32,6 +32,22 @@ function userController($scope, $http){
   //     });
   // };
 
+  //show details of individual user
+  $scope.showUser = function(id){
+    $http.get('/api/users/' + id)
+    .success(function(data){
+      $scope.user = data;
+      console.log(data);
+      
+        
+      
+    })
+    .error(function(data){
+      console.log('Error: ' + data);
+    });
+  }
+
+
   //deleted a book after checking it
   $scope.deleteUser = function(id){
     $http.delete('/api/users/' + id)
