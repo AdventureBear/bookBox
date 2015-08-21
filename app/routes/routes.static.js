@@ -20,12 +20,15 @@ module.exports = function(app, passport) {
       // you'll want to use res.render for routes
       //res.sendFile(path.resolve('temp/index.html'))
       // res.sendfile(path.resolve('../../views/books/index.html')), 
-      res.render('../views/books/index.ejs', {
-        books: []
-      })
+      res.send('Hello World') ;
+      //res.render('../views/books/index.html', {
+        //books: []
+      //})
     }
     else {
-      res.render('../views/index.ejs');
+       //res.send('Hello World') ;
+       res.sendfile('./public/index.html');
+      //res.render('../views/index');
 
     }
   });

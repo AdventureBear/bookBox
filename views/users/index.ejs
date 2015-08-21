@@ -51,20 +51,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--<tr>
-                                <td>
-                                    <input class="form-control" ng-model="book.name">
-                                </td>
-                                <td>
-                                    <input class="form-control" ng-model="book.owner">
-                                </td>
-                                <td>
-                                    <button class="btn btn-info" ng-click="createBook()">Add Book</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" ng-click="deleteBook(book._id)">Update</button>
-                                </td>
-                            </tr>-->
                             <tr ng-repeat="user in users">
                                 <td>User Name (future)</td>
                                 <td><a ng-href="/users/{{user._id}}">{{user.local.email}}</a></td>
@@ -72,7 +58,7 @@
                                     <button class="btn btn-danger" ng-click="">{{user.books.length}}</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning" ng-click="">View</button>
+                                    <button class="btn btn-warning" ng-click="showUser(user._id)">View</button>
                                 </td>
 
                             </tr>

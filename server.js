@@ -41,8 +41,8 @@ app.use(morgan('dev'));
 console.log(__dirname);
 app.use(cookieParser());
 
-app.set('views', process.cwd() + '/views');
-app.set('view engine', 'ejs');
+//app.set('views', process.cwd() + '/views');
+//app.set('view engine', '');
 
 //required for passport
 app.use(session({secret: 'ilovescotchscotchyscotchscotch'}));
